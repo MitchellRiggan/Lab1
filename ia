@@ -1,0 +1,5 @@
+--Q4.1 
+/*You cannot delete virginia from data tables because you still have VA record in other tables*/
+
+Q4.2 
+/*NO, because no state has fips of 80*/
