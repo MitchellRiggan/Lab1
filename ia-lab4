@@ -1,0 +1,40 @@
+--Q4.1 
+/*You cannot delete virginia from data tables because you still have VA record in other tables*/
+
+--Q4.2 
+/*NO, because no state has fips of 80*/
+
+--Q4.3
+/* it worked, but it could use some improvements*/
+
+--Q4.5
+/*yes it did a good job*/
+
+--Q4.6
+/* SELECT s.name, s.fips, i.income
+FROM states s
+JOIN income i ON s.fips = i.fips
+WHERE i.year = (SELECT MAX(year) FROM income)  -- assuming you want the latest year available
+ORDER BY i.income DESC
+LIMIT 1;
+yes it should work*/
+
+--Q4.7 
+/*WITH population_va AS (
+    SELECT year, population
+    FROM population
+    WHERE fips = '51'  -- FIPS code for Virginia
+    ORDER BY year DESC
+    LIMIT 6  -- We need 6 years to calculate 5 growth rates (previous year comparison)
+)
+SELECT 
+    year,
+    population,
+    LAG(population) OVER (ORDER BY year) AS previous_population,
+    ROUND(((population - LAG(population) OVER (ORDER BY year))::FLOAT / LAG(population) OVER (ORDER BY year)) * 100, 2) AS growth_rate_percentage
+FROM population_va
+WHERE LAG(population) OVER (ORDER BY year) IS NOT NULL; -- Only calculate where previous year exists
+Does not work yet, will need modification to work in my database*/
+
+--Q4.8
+/* chat gpt does ot always produe accurate responses, its like a human mind thats still learning those answers*/
